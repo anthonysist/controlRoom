@@ -1,0 +1,67 @@
+body{
+	background-color: #CACACA;
+}
+
+html {
+	
+}
+
+ul, li {
+	list-style: none;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1400px;
+  }
+}
+
+/*not even a nav, just a bar at the top, whatever- */
+.masterNav {
+	height: 55px;
+	background-color: #ffffff;
+	margin-bottom: 0;
+	border: none;
+	border-radius: 0;
+	margin: 30px;
+}
+
+.subNavStatus {
+	color: #000;
+	background-color: #ffffff;
+	text-align: center;
+	width: 80%;
+	margin: 25px auto;
+}
+	
+.navbar-brand {
+	padding-top: 5px;
+}
+
+	.subNavStatusText {
+		background-color: #ffffff;
+	}
+
+
+
+/* basic styles for the tiles */
+
+.tile {
+	padding: 5px;
+	
+}
+
+	.tileContent {
+		background-color: #ffffff;
+		padding: 5px;
+		height: 400px;
+	}
+
+	.tileContent > ul {
+		padding: 0 20px;
+	}
+
+
+.tileContent.largeContent {
+	height: 500px;
+}
