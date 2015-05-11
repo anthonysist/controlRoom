@@ -15,7 +15,7 @@ var five = require("../lib/johnny-five.js"),
 
 
     server.listen(3000);
-
+    console.log('site is running on port 3000');
     //SITE STUFF///////////
 // Request headers you wish to allow
 
@@ -48,23 +48,60 @@ var five = require("../lib/johnny-five.js"),
             freq: 25
         });
 
-        led = new five.Led(9);
+        fsrTwo = new five.Sensor({
+            pin: "A1",
+            freq: 25
+        });
 
+        led = new five.Led(9);
         var pressureData;
         var pressed = 0;
         // Scale the sensor's value to the LED's brightness range
+        //Sensor One
         fsr.scale([0, 255]).on("data", function() {
 
+
             if(this.value == 0){
-                console.log("no one is touching me");
+
             }
 
             if(this.value > 1 ) {
 
                 if(pressed == 0) {
-                    socket.emit('sensor', this.value);
-                    console.log("oh baby.... keep touching me.");
+                    socket.emit('sensorOne', this.value);
+                    console.log("Sensor One Pressed!");
                     pressed = 1;
+                    pressedTwo = 0;
+                }
+
+            }
+            // set the led's brightness based on force
+            // applied to force sensitive resistor
+
+            led.brightness(this.value);
+
+            pressureData = this.value;
+
+
+
+        });
+
+        //Sensor Two
+        var pressedTwo = 0
+        fsrTwo.scale([0, 255]).on("data", function() {
+
+
+            if(this.value == 0){
+
+            }
+
+            if(this.value > 1 ) {
+
+                if(pressedTwo == 0) {
+                    socket.emit('sensorTwo', this.value);
+                    console.log("Sensor Two pressed!");
+                    pressedTwo = 1;
+                    pressed = 0;
                 }
 
 
